@@ -1,10 +1,8 @@
 import "./mypage.css";
-import { useRouter } from 'next/router';
 import MyPage from '../../../components/MyPage/MyPage';
 import Header from "../../../components/Header/Header"
 
 export default function Register() {
-    const router = useRouter();
 
     return (
         <>
@@ -14,7 +12,7 @@ export default function Register() {
                 <img src="/noAvatar.png" alt="This is a profile photo." className="userImg" />
             </div>
 
-            <p className="myPageTxt">Let's start learning Japanese.</p>
+            <p className="myPageTxt">Let&apos;s start learning Japanese.</p>
 
             <div className="levelContainer">
                 <div className="nBox">
