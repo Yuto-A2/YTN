@@ -1,4 +1,3 @@
-// import Nav from "./Nav"
 import "./Header.css";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -25,12 +24,16 @@ export default function Header() {
   useEffect(() => {
     getCurrentUser();
   }, []);
-  // Logout
+
   const doLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw new Error(error.message);
     router.reload();
   };
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
 
   return (
     <>
@@ -49,8 +52,12 @@ export default function Header() {
               <Link href="/Login/Login">
                 <button className="logIn">Log in</button>
               </Link>
-            </>) : (
-            <button className="logOut" onClick={() => doLogout()}>Logout&#8594;</button>)}
+            </>
+          ) : (
+            <button className="logOut" onClick={() => doLogout()}>
+              Logout&#8594;
+            </button>
+          )}
         </div>
       </header>
     </>

@@ -28,7 +28,7 @@ const MyPage = () => {
         if (!loading && currentUser === null) {
             router.push('/Login/Login');  
         }
-    }, [currentUser, loading, router]);
+    }, [currentUser, loading]);
 
     return (
         <div>

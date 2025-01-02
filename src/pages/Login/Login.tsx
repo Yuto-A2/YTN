@@ -1,5 +1,5 @@
 import "./login.css";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router'
 import Header from "../../../components/Header/Header"
