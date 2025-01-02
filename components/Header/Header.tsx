@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../utils/supabase';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Header() {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
@@ -25,16 +26,12 @@ export default function Header() {
   useEffect(() => {
     getCurrentUser();
   }, []);
-  // Logout
+
   const doLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw new Error(error.message);
     router.reload();
   };
-
-  if (currentUser) {
-
-  }
 
   return (
     <>
@@ -42,7 +39,7 @@ export default function Header() {
         <div className="titleContainer">
           <Link href="/" className="homePage">
             <h1 id="siteTitle">YTN</h1>
-            <img id="logoImg" src="/logo.jpg" alt="J-Goal's logo" />
+            <Image id="logoImg" src="/logo.jpg" alt="J-Goal's logo" width={50} height={50} />
           </Link>
 
           {!currentUser ? (
@@ -53,8 +50,10 @@ export default function Header() {
               <Link href="/Login/Login">
                 <button className="logIn">Log in</button>
               </Link>
-            </>) : (
-            <button className="logOut" onClick={() => doLogout()}>Logout</button>)}
+            </>
+          ) : (
+            <button className="logOut" onClick={() => doLogout()}>Logout&#8594;</button>
+          )}
         </div>
       </header>
     </>
