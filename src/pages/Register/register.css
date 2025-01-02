@@ -1,0 +1,70 @@
+.main {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.signPageContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.signupLetter {
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.signupPageBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.signupExplanation1 {
+    margin-bottom: 1px;
+}
+
+.signupExplanation2 {
+    margin-top: 1px;
+}
+
+/* login form */
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signupFormContainer {
+    margin-right: 20%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+input {
+    width: 560px;
+    height: 49px;
+}
+
+.btn {
+    width: 196px;
+    height: 40px;
+    font-size: 1.2rem;
+    background-color: #528CF8;
+    border-radius: 1.2rem;
+    transition: all 0.8s;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.formBtn {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,76 @@
+
+/* header */
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+h1 {
+    font-size: 1.4em;
+    margin-right: 10px;
+    margin-left: 5%;
+}
+
+#logoImg {
+    width: 51px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 40%;
+}
+
+.signUp {
+    background-color: #C8EEF9;
+    width: 114px;
+    height: 40px;
+    margin-right: 20px;
+    border: solid 1px black;
+    border-radius: 1.2rem;
+    font-weight: bold;
+    transition: all 0.8s;
+}
+
+.signUp:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.logIn {
+    background-color: #528CF8;
+    width: 114px;
+    height: 40px;
+    margin-right: 20px;
+    border: solid 1px black;
+    border-radius: 1.2rem;
+    font-weight: bold;
+    transition: all 0.8s;
+}
+
+.logIn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.logOut{
+    background-color: #C8EEF9;
+    width: 114px;
+    height: 40px;
+    margin-right: 20px;
+    border: solid 1px black;
+    border-radius: 1.2rem;
+    font-weight: bold;
+    transition: all 0.8s;
+}
+
+.logOut:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.homePage {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none; 
+    color: inherit;
+    flex-grow: 1;
+}
+/* /header */

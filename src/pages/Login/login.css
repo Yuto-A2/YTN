@@ -1,0 +1,81 @@
+.main {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.loginPageContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.loginLetter {
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.loginPageBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginExplanation1 {
+    margin-bottom: 1px;
+}
+
+.loginExplanation2 {
+    margin-top: 1px;
+}
+
+/* login form */
+.loginContainer {
+    display: flex;
+    flex-direction: row;  
+    align-items: flex-start;
+    position: relative;
+}
+
+.loginForm {
+    margin-right: 20%; 
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 25px;
+}
+
+input {
+    width: 310px;
+    height: 49px;
+}
+
+.formBtn {
+    position: absolute;
+    bottom: -20%;
+    left: 40%;
+}
+
+.btn {
+    width: 114px;
+    height: 40px;
+    background-color: #528CF8;
+    border-radius: 1.2rem;
+    transition: all 0.8s;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.registerTxt {
+    font-weight: bold;
+}
+
+.notRegisterd {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    margin-left: 5px;
+}
