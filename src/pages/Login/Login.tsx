@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./login.css";
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router'
