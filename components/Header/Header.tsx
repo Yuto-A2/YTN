@@ -53,12 +53,8 @@ export default function Header() {
               <Link href="/Login/Login">
                 <button className="logIn">Log in</button>
               </Link>
-            </>
-          ) : (
-            <button className="logOut" onClick={() => doLogout()}>
-              Logout&#8594; {/* エスケープ文字を使用 */}
-            </button>
-          )}
+            </>) : (
+            <button className="logOut" onClick={() => doLogout()}>Logout</button>)}
         </div>
       </header>
     </>
