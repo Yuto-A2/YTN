@@ -22,7 +22,7 @@ export default function QuestionWords() {
     useEffect(() => {
         async function fetchQuestions() {
             try {
-                const response = await fetch('https://ytn-lemon.vercel.app/api/quiz');
+                const response = await fetch('/api/quiz');
                 if (!response.ok) {
                     throw new Error("Failed to fetch questions");
                 }
