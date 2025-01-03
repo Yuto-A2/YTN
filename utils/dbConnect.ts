@@ -6,7 +6,7 @@ const dbConnect = async () => {
     if (mongoose.connection.readyState >= 1) {
         return;
     }
-    await mongoose.connect("mongodb+srv://temothy101629:4st5Yw4uH05FqQIy@cluster0.92w5o.mongodb.net/");
+    await mongoose.connect(MONGO_URI);
 };
 
 export default dbConnect;
