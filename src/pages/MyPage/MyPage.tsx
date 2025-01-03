@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react';
 import "./mypage.css";
 import MyPage from '../../../components/MyPage/MyPage';
-import Header from "../../../components/Header/Header"
-
+import Header from "../../../components/Header/Header";
+import Level from "../../../components/Level/Level";
 export default function Register() {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        async function fetchCategories() {
+            try {
+                const response = await fetch('/api/N5');
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        }
+
+        fetchCategories();
+    }, []);
 
     return (
         <>
@@ -13,53 +29,7 @@ export default function Register() {
             </div>
 
             <p className="myPageTxt">Let&apos;s start learning Japanese.</p>
-
-            <div className="levelContainer">
-                <div className="nBox">
-                    <a className="toQuiz" href="../Practice/Practice.html">
-                        <p className="jlptLevel">N5</p>
-                    </a>
-                    <div className="progressBar">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-
-                <div className="nBox">
-                    <a className="toQuiz" href="#">
-                        <p className="jlptLevel">N4</p>
-                    </a>
-                    <div className="progressBar">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-
-                <div className="nBox">
-                    <a className="toQuiz" href="#">
-                        <p className="jlptLevel">N3</p>
-                    </a>
-                    <div className="progressBar">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-
-                <div className="nBox">
-                    <a className="toQuiz" href="#">
-                        <p className="jlptLevel">N2</p>
-                    </a>
-                    <div className="progressBar">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-
-                <div className="nBox">
-                    <a className="toQuiz" href="#">
-                        <p className="jlptLevel">N1</p>
-                    </a>
-                    <div className="progressBar">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-            </div>
+            <Level />
 
             <div className="txtContainer">
                 <p className="txt">You have done.</p>
@@ -67,39 +37,18 @@ export default function Register() {
             </div>
 
             <div className="quizTitleContainer">
-
-                <a className="quizLink" href="#">
-                    <div className="title">
-                        <div className="textTitleBox">
-                            <p className="txtTitle">「です」と「でした」</p>
+                {categories.map((category, index) => (
+                    <a key={index} className="quizLink" href="#">
+                        <div className="title">
+                            <div className="textTitleBox">
+                                <p className="txtTitle">{category}</p>
+                            </div>
+                            <div className="score">
+                                <p>Score 10/10</p>
+                            </div>
                         </div>
-                        <div className="score">
-                            <p>Score 10/10</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a className="quizLink" href="#">
-                    <div className="title">
-                        <div className="textTitleBox">
-                            <p className="txtTitle">「ます」と「ました」</p>
-                        </div>
-                        <div className="score">
-                            <p>Score 10/10</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a className="quizLink" href="#">
-                    <div className="title">
-                        <div className="textTitleBox">
-                            <p className="txtTitle">ぎもんし</p>
-                        </div>
-                        <div className="score">
-                            <p>Score 8/10</p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                ))}
             </div>
         </>
     );

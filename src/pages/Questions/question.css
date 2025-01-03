@@ -1,0 +1,7 @@
+.quizQuestion, .quizChoices, h2 {
+    margin-left: 1.2rem;
+}
+
+.quizChoices {
+    margin-bottom: 24px;
+}

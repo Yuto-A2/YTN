@@ -1,0 +1,54 @@
+/* levelContainer */
+.levelContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.nBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+    width: 54px;
+    height: 42px;
+    margin-top: 30px;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    position: relative;
+}
+
+.nBox a {
+    color: black;
+}
+
+.toQuiz {
+    text-decoration: none;
+}
+
+.nBox:hover {
+    cursor: pointer;
+    background-color: #528CF8;
+    box-shadow: 5px 5px 20px -10px;
+}
+
+.progressBar {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.progress {
+    height: 100%;
+    background: #76c7c0;
+    transition: width 0.5s;
+}
+
+.txtContainer {
+    margin-top: 50px;
+}
