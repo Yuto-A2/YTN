@@ -10,14 +10,14 @@ interface Category {
 }
 
 export default function Register() {
-    const [categories, setCategories] = useState<Category[]>([]); // Category型の配列として型指定
+    const [categories, setCategories] = useState<Category[]>([]); 
 
     useEffect(() => {
         async function fetchCategories() {
             try {
                 const response = await fetch('/api/N5');
                 const data = await response.json();
-                setCategories(data);  // ここで categories の状態を更新
+                setCategories(data);  
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
@@ -47,7 +47,7 @@ export default function Register() {
                     <a key={index} className="quizLink" href="#">
                         <div className="title">
                             <div className="textTitleBox">
-                                <p className="txtTitle">{category.name}</p> {/* category.nameにアクセス */}
+                                <p className="txtTitle">{category.name}</p> 
                             </div>
                             <div className="score">
                                 <p>Score 10/10</p>

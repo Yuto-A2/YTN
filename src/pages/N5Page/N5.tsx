@@ -4,21 +4,21 @@ import Header from "../../../components/Header/Header";
 import Level from "../../../components/Level/Level";
 import Link from "next/link"; 
 
-// Category型を定義
+
 interface Category {
     name: string;
     link: string;
 }
 
 export default function Register() {
-    const [categories, setCategories] = useState<Category[]>([]); // 型指定
+    const [categories, setCategories] = useState<Category[]>([]); 
 
     useEffect(() => {
         async function fetchCategories() {
             try {
                 const response = await fetch('/api/N5');
                 const data = await response.json();
-                setCategories(data); // dataをセット
+                setCategories(data); 
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
