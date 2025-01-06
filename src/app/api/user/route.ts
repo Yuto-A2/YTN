@@ -3,10 +3,6 @@ import User from "../../../../models/User";
 import { NextResponse } from "next/server";
 import { supabase } from '../../../../utils/supabase';
 
-// 型の定義
-interface Score {
-  score: number;
-}
 
 // GET: ユーザー一覧を取得
 export const GET = async () => {

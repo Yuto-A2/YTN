@@ -3,21 +3,27 @@ import "./mypage.css";
 import MyPage from '../../../components/MyPage/MyPage';
 import Header from "../../../components/Header/Header";
 import Level from "../../../components/Level/Level";
+
+interface Category {
+    id: number;
+    name: string;
+}
+
 export default function Register() {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]); // Category型の配列として型指定
 
     useEffect(() => {
         async function fetchCategories() {
             try {
                 const response = await fetch('/api/N5');
                 const data = await response.json();
-                setCategories(data);
+                setCategories(data);  // ここで categories の状態を更新
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
         }
 
-        fetchCategories();
+        fetchCategories(); 
     }, []);
 
     return (
@@ -41,7 +47,7 @@ export default function Register() {
                     <a key={index} className="quizLink" href="#">
                         <div className="title">
                             <div className="textTitleBox">
-                                <p className="txtTitle">{category}</p>
+                                <p className="txtTitle">{category.name}</p> {/* category.nameにアクセス */}
                             </div>
                             <div className="score">
                                 <p>Score 10/10</p>

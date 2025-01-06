@@ -20,7 +20,6 @@ export default function QuestionWords() {
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [score, setScore] = useState<number>(0);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); 
 
     useEffect(() => {
         async function fetchQuestions() {
@@ -30,8 +29,10 @@ export default function QuestionWords() {
                     throw new Error("Failed to fetch questions");
                 }
                 const data = await response.json();
-                if (data.quizes && data.quizes.length > 0) {
+                if (data?.quizes?.length > 0) {
                     setQuestions(data.quizes[0].questions);
+                } else {
+                    setError("No questions available");
                 }
             } catch (error: unknown) {
                 if (error instanceof Error) {
@@ -54,8 +55,6 @@ export default function QuestionWords() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
                 router.push('/Login/Login');
-            } else {
-                setIsLoggedIn(true);
             }
         }
 
