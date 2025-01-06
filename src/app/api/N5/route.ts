@@ -1,24 +1,19 @@
-import dbConnect from '../../../../utils/dbConnect';
-import Quiz from '../../../../models/Quiz';
+import { NextResponse } from 'next/server'; // NextResponse をインポート
+import dbConnect from '../../../../utils/dbConnect'; 
+import Quiz from '../../../../models/Quiz'; 
 
-export const GET = async () => {  
+export async function GET(req: Request) {
+    await dbConnect(); // データベースに接続
+
     try {
-        await dbConnect(); 
+        // level が 'N5' のカテゴリを Quiz コレクションから取得
         const quizzes = await Quiz.find({ level: 'N5' }).select('category');
-        const categories = quizzes.map(quiz => quiz.category); 
-        return new Response(JSON.stringify(categories), {
-            status: 200,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const categories = quizzes.map(quiz => quiz.category);
+
+        // NextResponse を使って JSON レスポンスを返す
+        return NextResponse.json(categories, { status: 200 });
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ message: 'Error retrieving categories' }), {
-            status: 500,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        return NextResponse.json({ message: 'Error retrieving categories' }, { status: 500 });
     }
-};
+}

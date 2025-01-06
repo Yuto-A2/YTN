@@ -1,8 +1,9 @@
-import "./login.css";
+import "./Login.css";
 import { useState } from 'react';
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router'
 import Header from "../../../components/Header/Header"
+import Footer from "../../../components/Footer/Footer"
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -24,11 +25,23 @@ export default function Register() {
     return (
         <>
             <Header />
+            <div className="explanation">
+        <div className="jGoalBox">
+          <p className="explaneJGoal">What is J-Goal?</p>
+        </div>
+        <div className="explanationBox">
+          <p className="explaneJGoal1">
+            J-Goal is a site to learn/practice Japanese (Especially for JLPT).
+          </p>
+          <p className="explaneJGoal2">
+            You can find exercises here.
+          </p>
+        </div>
+      </div>
             <div className="main">
                 <div className="loginPageContainer">
                     <p className="loginLetter">Log in</p>
                     <div className="loginPageBox">
-                        <p className="loginExplanation1">This site is for learning Japanese.</p>
                         <p className="loginExplanation1">If you log in, you can record your score.</p>
                         <p className="loginExplanation2">That will be easy to review exercises.</p>
                     </div>
@@ -72,6 +85,7 @@ export default function Register() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 

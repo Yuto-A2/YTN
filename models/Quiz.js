@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 
+// 既存のモデルを削除
+delete mongoose.models.Quiz;
+
+// 新しいスキーマの定義
 const QuizSchema = new mongoose.Schema(
     {
         level: {
             type: String,
             required: true,
         },
-        category: {
-            type: String,
-            required: true,
+        category: {  
+            name: { type: String, default: "" },
+            link: { type: String, default: "" },
         },
         questions: {
             type: [
@@ -45,6 +49,7 @@ const QuizSchema = new mongoose.Schema(
     { timestamps: true } 
 );
 
-const Quiz = mongoose.models.Quiz || mongoose.model("Quiz", QuizSchema);
+// 新しいスキーマを使ってモデルを作成
+const Quiz = mongoose.model("Quiz", QuizSchema);
 
 module.exports = Quiz;

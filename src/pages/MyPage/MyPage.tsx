@@ -36,7 +36,7 @@ export default function Register() {
                 <p className="txt">Click to see your history.</p>
             </div>
 
-            <div className="quizTitleContainer">
+            {/* <div className="quizTitleContainer">
                 {categories.map((category, index) => (
                     <a key={index} className="quizLink" href="#">
                         <div className="title">
@@ -49,7 +49,7 @@ export default function Register() {
                         </div>
                     </a>
                 ))}
-            </div>
+            </div> */}
         </>
     );
 }

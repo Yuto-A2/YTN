@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import "./question.css";
 import Header from "../../../components/Header/Header";
-
+import { supabase } from '../../../utils/supabase';
+import { useRouter } from 'next/router';
 
 interface Question {
     questionId: string;
@@ -12,12 +13,14 @@ interface Question {
 }
 
 export default function QuestionWords() {
+    const router = useRouter();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [score, setScore] = useState<number>(0);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); 
 
     useEffect(() => {
         async function fetchQuestions() {
@@ -45,6 +48,19 @@ export default function QuestionWords() {
 
         fetchQuestions();
     }, []);
+
+    useEffect(() => {
+        async function checkLoginStatus() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                router.push('/Login/Login');
+            } else {
+                setIsLoggedIn(true);
+            }
+        }
+
+        checkLoginStatus();
+    }, [router]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -84,11 +100,9 @@ export default function QuestionWords() {
                     <form onSubmit={handleSubmit}>
                         {questions.map((question) => (
                             <div key={question._id} className="quizItem">
-                                {/* questions */}
                                 <p className="quizQuestion">
                                     {question.questionId}. {question.question}
                                 </p>
-                                {/* choices */}
                                 <div className="quizChoices">
                                     {question.candidates.map((candidate, index) => (
                                         <label key={index} className="quizChoice">

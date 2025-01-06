@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router'
 import Header from "../../../components/Header/Header"
+import Footer from "../../../components/Footer/Footer"
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -105,6 +106,7 @@ export default function Register() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }
