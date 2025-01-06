@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'; // NextResponse をインポート
 import dbConnect from '../../../../utils/dbConnect'; 
 import Quiz from '../../../../models/Quiz'; 
 
-export async function GET(req: Request) {
+export async function GET() {
     await dbConnect(); // データベースに接続
 
     try {

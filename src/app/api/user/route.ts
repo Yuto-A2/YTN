@@ -8,11 +8,6 @@ interface Score {
   score: number;
 }
 
-interface PostRequestBody {
-  profilePicture: string;
-  scores: Score[];
-}
-
 // GET: ユーザー一覧を取得
 export const GET = async () => {
   try {
