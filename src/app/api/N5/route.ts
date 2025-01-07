@@ -1,16 +1,14 @@
-import { NextResponse } from 'next/server'; // NextResponse をインポート
+import { NextResponse } from 'next/server'; 
 import dbConnect from '../../../../utils/dbConnect'; 
 import Quiz from '../../../../models/Quiz'; 
 
 export async function GET() {
-    await dbConnect(); // データベースに接続
+    await dbConnect(); 
 
     try {
-        // level が 'N5' のカテゴリを Quiz コレクションから取得
         const quizzes = await Quiz.find({ level: 'N5' }).select('category');
         const categories = quizzes.map(quiz => quiz.category);
 
-        // NextResponse を使って JSON レスポンスを返す
         return NextResponse.json(categories, { status: 200 });
     } catch (error) {
         console.error(error);

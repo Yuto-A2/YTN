@@ -27,11 +27,11 @@ export default function Register() {
             <Header />
             <div className="explanation">
         <div className="jGoalBox">
-          <p className="explaneJGoal">What is J-Goal?</p>
+          <p className="explaneJGoal">What is YTN?</p>
         </div>
         <div className="explanationBox">
           <p className="explaneJGoal1">
-            J-Goal is a site to learn/practice Japanese (Especially for JLPT).
+            YTN (stands for Youto Nihongo) is a site to learn/practice Japanese (Especially for JLPT).
           </p>
           <p className="explaneJGoal2">
             You can find exercises here.

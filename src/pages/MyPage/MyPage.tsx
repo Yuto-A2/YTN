@@ -4,27 +4,27 @@ import MyPage from '../../../components/MyPage/MyPage';
 import Header from "../../../components/Header/Header";
 import Level from "../../../components/Level/Level";
 
-interface Category {
-    id: number;
-    name: string;
-}
+// interface Category {
+//     id: number;
+//     name: string;
+// }
 
 export default function Register() {
-    const [categories, setCategories] = useState<Category[]>([]); 
+    // const [categories, setCategories] = useState<Category[]>([]); 
 
-    useEffect(() => {
-        async function fetchCategories() {
-            try {
-                const response = await fetch('/api/N5');
-                const data = await response.json();
-                setCategories(data);  
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        }
+    // useEffect(() => {
+    //     async function fetchCategories() {
+    //         try {
+    //             const response = await fetch('/api/N5');
+    //             const data = await response.json();
+    //             setCategories(data);  
+    //         } catch (error) {
+    //             console.error("Error fetching categories:", error);
+    //         }
+    //     }
 
-        fetchCategories(); 
-    }, []);
+    //     fetchCategories(); 
+    // }, []);
 
     return (
         <>
@@ -37,7 +37,7 @@ export default function Register() {
             <p className="myPageTxt">Let&apos;s start learning Japanese.</p>
             <Level />
 
-            <div className="txtContainer">
+            {/* <div className="txtContainer">
                 <p className="txt">You have done.</p>
                 <p className="txt">Click to see your history.</p>
             </div>
@@ -55,7 +55,7 @@ export default function Register() {
                         </div>
                     </a>
                 ))}
-            </div>
+            </div> */}
         </>
     );
 }
