@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import "./mypage.css";
 import MyPage from '../../../components/MyPage/MyPage';
 import Header from "../../../components/Header/Header";
