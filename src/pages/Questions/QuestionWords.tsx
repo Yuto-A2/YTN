@@ -76,19 +76,52 @@ export default function QuestionWords() {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         let userScore = 0;
         questions.forEach((question) => {
             if (selectedAnswers[question.questionId] === question.answer) {
                 userScore++;
             }
         });
-
+    
         setScore(userScore);
         setIsSubmitted(true);
+    
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                throw new Error("User not logged in");
+            }
+    
+            const response = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    supabaseId: session.user.id,
+                    quizId: questions[0]._id, 
+                    score: userScore,
+                    profilePicture: session.user.user_metadata?.profilePicture || "",
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error("Failed to update score");
+            }
+    
+            console.log("Score updated successfully");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error("Error updating score:", error.message);
+            } else {
+                console.error("Unknown error occurred while updating score");
+            }
+        }
     };
+    
 
     return (
         <>

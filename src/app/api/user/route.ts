@@ -1,55 +1,71 @@
 import dbConnect from "../../../../utils/dbConnect";
 import User from "../../../../models/User";
 import { NextResponse } from "next/server";
-import { supabase } from '../../../../utils/supabase';
 
-
-export const GET = async () => {
-  try {
-    await dbConnect();
-    const users = await User.find();
-    return NextResponse.json({ message: "Success", users }, { status: 200 });
-  } catch (err) {
-    console.error("Error fetching users:", err);
-    return NextResponse.json({ message: "Error", error: err }, { status: 500 });
-  }
-};
+export const GET = async (req: Request) => {
+    try {
+      const url = new URL(req.url);
+      const supabaseId = url.searchParams.get("supabaseId");
+  
+      if (!supabaseId) {
+        return NextResponse.json({ message: "Supabase ID is required" }, { status: 400 });
+      }
+  
+      await dbConnect();
+  
+      // supabaseId でユーザーを検索
+      const dbUser = await User.findOne({ supabaseId });
+  
+      if (!dbUser) {
+        return NextResponse.json({ message: "User not found" }, { status: 404 });
+      }
+  
+      // ユーザーのスコア情報を取得
+      const { scores, totalScore } = dbUser;
+  
+      return NextResponse.json({ scores, totalScore }, { status: 200 });
+    } catch (err) {
+      console.error("Error fetching user score:", err);
+      return NextResponse.json({ message: "Error", error: err instanceof Error ? err.message : "Unknown error" }, { status: 500 });
+    }
+  };
 
 export const POST = async (req: Request) => {
   try {
-    const { data: { session }, error } = await supabase.auth.getSession();
-
-    if (error || !session) {
-      console.error("Authentication required");
-      return NextResponse.json({ message: "Error", error: "Authentication required" }, { status: 401 });
-    }
-
-    const supabaseId = session.user.id;
-    console.log("User authenticated:", supabaseId);
+    const { supabaseId, quizId, score, profilePicture } = await req.json();
 
     await dbConnect();
 
-    const { profilePicture, scores } = await req.json();
-
+    // ユーザーの検索または作成
     let dbUser = await User.findOne({ supabaseId });
     if (!dbUser) {
-      dbUser = new User({ supabaseId });
+      // 新しいユーザーを作成
+      dbUser = new User({
+        supabaseId,
+        profilePicture: profilePicture || "",
+        scores: [],
+        totalScore: 0,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     }
 
-    const totalScore = scores.reduce((sum: number, score: { score: number }) => {
-      return score.score > 0 ? sum + score.score : sum;
-    }, 0);
+    // スコアの更新または追加
+    const existingScore = dbUser.scores.find((s: { quizId: string }) => s.quizId === quizId);
+    if (existingScore) {
+      existingScore.score = score; // 既存のスコアを更新
+    } else {
+      dbUser.scores.push({ quizId, score }); // 新しいスコアを追加
+    }
 
-    dbUser.profilePicture = profilePicture || ""; 
-    dbUser.scores = scores; 
-    dbUser.totalScore = totalScore; 
+    dbUser.totalScore = dbUser.scores.reduce((total: number, s: { score: number }) => total + s.score, 0);
 
-    const updatedUser = await dbUser.save();
+    // ユーザーを保存
+    await dbUser.save();
 
-    return NextResponse.json({ message: "Success", user: updatedUser }, { status: 201 });
-
+    return NextResponse.json({ message: "User created/updated successfully", user: dbUser }, { status: 200 });
   } catch (err) {
-    console.error("Error updating user:", err);
+    console.error("Error updating or creating user:", err);
     return NextResponse.json({ message: "Error", error: err instanceof Error ? err.message : "Unknown error" }, { status: 500 });
   }
 };

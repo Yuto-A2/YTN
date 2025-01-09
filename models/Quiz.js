@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
-// 既存のモデルを削除
 delete mongoose.models.Quiz;
-
-// 新しいスキーマの定義
 const QuizSchema = new mongoose.Schema(
     {
         level: {
@@ -49,7 +46,6 @@ const QuizSchema = new mongoose.Schema(
     { timestamps: true } 
 );
 
-// 新しいスキーマを使ってモデルを作成
 const Quiz = mongoose.model("Quiz", QuizSchema);
 
 module.exports = Quiz;
