@@ -3,10 +3,25 @@
     margin-top: 5%;
 }
 
+
 .loginPageContainer {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
+}
+
+@media screen and (max-width: 480px) {
+    section {
+        width: 500px;
+    }
+
+    .loginPageContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
 }
 
 .loginLetter {
@@ -30,30 +45,71 @@
 /* login form */
 .loginContainer {
     display: flex;
-    flex-direction: row;  
+    flex-direction: row;
     align-items: flex-start;
     position: relative;
 }
 
+@media screen and (max-width: 480px) {
+    .loginPageContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .loginContainer {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 .loginForm {
-    margin-right: 20%; 
+    margin-right: 20%;
+}
+
+@media screen and (max-width: 480px) {
+    .loginForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
 }
 
 .formGroup {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin-bottom: 25px;
 }
 
 input {
-    width: 310px;
+    width: 500px;
+    border: solid black 1px;
     height: 49px;
+}
+
+@media screen and (max-width: 480px) {
+    input {
+        width: 400px;
+        height: 49px;
+    }
 }
 
 .formBtn {
     position: absolute;
     bottom: -20%;
     left: 40%;
+}
+
+@media screen and (max-width: 480px) {
+    .formBtn {
+        width: 300px;
+        right: 0px;
+        top: 100%;
+    }
 }
 
 .btn {
@@ -75,9 +131,25 @@ input {
 
 .notRegisterd {
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
+    flex-direction: column;
+    justify-content: center;
     margin-left: 5px;
+}
+
+@media screen and (max-width: 480px) {
+    input {
+        display: flex;
+        width: 200px;
+        height: 49px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loginContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
 }
 
 
@@ -85,7 +157,15 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     margin-top: 10%;
+}
+
+@media screen and (max-width: 480px) {
+    .explanation {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .jGoalBox {

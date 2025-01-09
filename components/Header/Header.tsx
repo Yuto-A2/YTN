@@ -32,7 +32,7 @@ export default function Header() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   return (
@@ -46,12 +46,14 @@ export default function Header() {
 
           {!currentUser ? (
             <>
-              <Link href="/Register/Register">
-                <button className="signUp">Sign up</button>
-              </Link>
-              <Link href="/Login/Login">
-                <button className="logIn">Log in</button>
-              </Link>
+              <div className="buttons">
+                <Link href="/Register/Register">
+                  <button className="signUp">Sign up</button>
+                </Link>
+                <Link href="/Login/Login">
+                  <button className="logIn">Log in</button>
+                </Link>
+              </div>
             </>
           ) : (
             <button className="logOut" onClick={() => doLogout()}>

@@ -25,66 +25,68 @@ export default function Register() {
     return (
         <>
             <Header />
-            <div className="explanation">
-        <div className="jGoalBox">
-          <p className="explaneJGoal">What is YTN?</p>
-        </div>
-        <div className="explanationBox">
-          <p className="explaneJGoal1">
-            YTN (stands for Youto Nihongo) is a site to learn/practice Japanese (Especially for JLPT).
-          </p>
-          <p className="explaneJGoal2">
-            You can find exercises here.
-          </p>
-        </div>
-      </div>
-            <div className="main">
-                <div className="loginPageContainer">
-                    <p className="loginLetter">Log in</p>
-                    <div className="loginPageBox">
-                        <p className="loginExplanation1">If you log in, you can record your score.</p>
-                        <p className="loginExplanation2">That will be easy to review exercises.</p>
+            <section>
+                <div className="explanation">
+                    <div className="jGoalBox">
+                        <p className="explaneJGoal">What is YTN?</p>
+                    </div>
+                    <div className="explanationBox">
+                        <p className="explaneJGoal1">
+                            YTN (stands for Youto Nihongo) is a site to learn/practice Japanese (Especially for JLPT).
+                        </p>
+                        <p className="explaneJGoal2">
+                            You can find exercises here.
+                        </p>
                     </div>
                 </div>
-
-                <div className="loginContainer">
-                    <div className="loginForm">
-                        <form className="login" method="post" onSubmit={doLogin}>
-                            <div className="formGroup">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    name="email"
-                                    id="email"
-                                    type="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            <div className="formGroup">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    name="password"
-                                    id="password"
-                                    type="password"
-                                    required
-                                    minLength={6}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <div className="formBtn">
-                                <button className="btn" type="submit">Login</button>
-                            </div>
-                        </form>
+                <div className="main">
+                    <div className="loginPageContainer">
+                        <p className="loginLetter">Log in</p>
+                        <div className="loginPageBox">
+                            <p className="loginExplanation1">If you log in, you can record your score.</p>
+                            <p className="loginExplanation2">That will be easy to review exercises.</p>
+                        </div>
                     </div>
 
-                    <div className="notRegisterd">
-                        <p className="registerTxt">To users not yet registered</p>
-                        <p>Please go to new registration page.</p>
+                    <div className="loginContainer">
+                        <div className="loginForm">
+                            <form className="login" method="post" onSubmit={doLogin}>
+                                <div className="formGroup">
+                                    <label htmlFor="email">Email</label>
+                                    <input
+                                        name="email"
+                                        id="email"
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className="formGroup">
+                                    <label htmlFor="password">Password</label>
+                                    <input
+                                        name="password"
+                                        id="password"
+                                        type="password"
+                                        required
+                                        minLength={6}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <div className="formBtn">
+                                    <button className="btn" type="submit">Login</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div className="notRegisterd">
+                            <p className="registerTxt">To users not yet registered</p>
+                            <p>Please go to new registration page.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
             <Footer />
         </>
     );
