@@ -3,11 +3,24 @@
     margin-top: 5%;
 }
 
+@media screen and (max-width: 480px) {
+    .main {
+        width: 100%;
+    }
+}
+
 .signPageContainer {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
 }
+
+@media screen and (max-width: 480px) {
+    .signPageContainer {
+        flex-direction: column;
+        justify-content: center;
+    }
+    }
 
 .signupLetter {
     font-weight: bold;
@@ -46,9 +59,21 @@
 }
 
 input {
+    border: solid black 1px;
     width: 560px;
     height: 49px;
 }
+
+@media screen and (max-width: 480px) {
+    input {
+       margin: auto 10%;
+        width: 400px;
+    }
+
+    label {
+        margin-left: 10%;
+    }
+    }
 
 .btn {
     width: 196px;

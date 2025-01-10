@@ -20,6 +20,13 @@
     position: relative;
 }
 
+@media screen and (max-width: 480px) {
+    .levelContainer {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+}
+
 .nBox a {
     color: black;
 }

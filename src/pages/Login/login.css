@@ -11,8 +11,12 @@
 }
 
 @media screen and (max-width: 480px) {
+    .main {
+        margin-left: 50%;
+    }
+
     section {
-        width: 500px;
+        width: 100%;
     }
 
     .loginPageContainer {
@@ -27,6 +31,7 @@
 .loginLetter {
     font-weight: bold;
     margin-right: 50px;
+    font-size: 1.4rem;
 }
 
 .loginPageBox {
@@ -63,6 +68,13 @@
         justify-content: center;
         align-items: center;
     }
+
+    .loginPageBox {
+        width: 500px;
+        text-align: center;
+        margin: auto 10%;
+    }
+
 }
 
 .loginForm {
@@ -107,7 +119,7 @@ input {
 @media screen and (max-width: 480px) {
     .formBtn {
         width: 300px;
-        right: 0px;
+        left: 20px;
         top: 100%;
     }
 }
@@ -165,6 +177,10 @@ input {
     .explanation {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        margin-left: 10%;
     }
 }
 
