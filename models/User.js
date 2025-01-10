@@ -21,6 +21,7 @@ const PostSchema = new Schema(
         score: {
           type: Number,
           required: true,
+          default: 0,
         },
         dateTaken: {
           type: Date,

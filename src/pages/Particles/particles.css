@@ -1,0 +1,33 @@
+.quizQuestion, .quizChoices, h2 {
+    margin-left: 1.2rem;
+}
+
+.quizChoices {
+    margin-bottom: 24px;
+}
+
+.btn {
+    width: 196px;
+    height: 40px;
+    font-size: 1.2rem;
+    background-color: #528CF8;
+    border-radius: 1.2rem;
+    transition: all 0.8s;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 480px) {
+    .quizChoices {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn {
+       margin: auto 50%;
+        width: 100px;
+    }
+    }

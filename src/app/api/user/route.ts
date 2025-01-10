@@ -13,14 +13,12 @@ export const GET = async (req: Request) => {
   
       await dbConnect();
   
-      // supabaseId でユーザーを検索
       const dbUser = await User.findOne({ supabaseId });
   
       if (!dbUser) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });
       }
   
-      // ユーザーのスコア情報を取得
       const { scores, totalScore } = dbUser;
   
       return NextResponse.json({ scores, totalScore }, { status: 200 });
@@ -36,10 +34,8 @@ export const POST = async (req: Request) => {
 
     await dbConnect();
 
-    // ユーザーの検索または作成
     let dbUser = await User.findOne({ supabaseId });
     if (!dbUser) {
-      // 新しいユーザーを作成
       dbUser = new User({
         supabaseId,
         profilePicture: profilePicture || "",
@@ -50,17 +46,15 @@ export const POST = async (req: Request) => {
       });
     }
 
-    // スコアの更新または追加
     const existingScore = dbUser.scores.find((s: { quizId: string }) => s.quizId === quizId);
     if (existingScore) {
-      existingScore.score = score; // 既存のスコアを更新
+      existingScore.score = score; 
     } else {
-      dbUser.scores.push({ quizId, score }); // 新しいスコアを追加
+      dbUser.scores.push({ quizId, score }); 
     }
 
     dbUser.totalScore = dbUser.scores.reduce((total: number, s: { score: number }) => total + s.score, 0);
 
-    // ユーザーを保存
     await dbUser.save();
 
     return NextResponse.json({ message: "User created/updated successfully", user: dbUser }, { status: 200 });
