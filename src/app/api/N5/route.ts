@@ -3,7 +3,6 @@ import dbConnect from '../../../../utils/dbConnect';
 import Quiz from '../../../../models/Quiz';
 import User from '../../../../models/User';
 
-// スコアオブジェクトの型を定義
 interface Score {
     quizId: string;
     score: number;
@@ -18,7 +17,6 @@ export async function GET() {
         const categories = quizzes.map(quiz => quiz.category);
         const users = await User.find();
 
-        // ユーザーごとのスコアを取得
         const userScores = users.map(user => {
             return {
                 supabaseId: user.supabaseId,

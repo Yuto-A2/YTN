@@ -66,7 +66,7 @@ export default function Register() {
         };
     
         const quizId = categoryToQuizIdMap[categoryName];
-        console.log(`quizId for ${categoryName}: ${quizId}`);  // quizIdをログに追加
+        console.log(`quizId for ${categoryName}: ${quizId}`);  
     
         if (!quizId) {
             console.log(`No quizId found for category: ${categoryName}`);
@@ -84,7 +84,7 @@ export default function Register() {
             return 0;
         }
     
-        console.log(`User scores for ${currentSupabaseId}:`, userScore.scores);  // ユーザーのスコアをログに表示
+        console.log(`User scores for ${currentSupabaseId}:`, userScore.scores);  
     
         const scoreObj = userScore.scores.find(score => score.quizId === quizId);
         if (!scoreObj) {
@@ -92,7 +92,7 @@ export default function Register() {
             return 0;
         }
     
-        console.log(`Score for quizId ${quizId}: ${scoreObj.score}`);  // スコアをログに表示
+        console.log(`Score for quizId ${quizId}: ${scoreObj.score}`);  
         return scoreObj.score;
     };
     
