@@ -35,6 +35,7 @@ export default function Register() {
             </div>
 
             <p className="myPageTxt">Let&apos;s start learning Japanese.</p>
+            <p className="myPageTxt">Only N5 quizzes are available for now.</p>
             <Level />
 
             {/* <div className="txtContainer">

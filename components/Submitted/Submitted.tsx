@@ -19,7 +19,7 @@ const Result: FC<ResultProps> = ({ score, totalQuestions, onTryAgain }) => {
         <div className="result">
             <h3>Your Score: {score} / {totalQuestions}</h3>
             <p className="result-message">
-                After submission, correct answers are shown in blue, and incorrect answers are shown in red.
+                Correct answers are shown in blue, and incorrect answers are shown in red.
             </p>
             <div className="result-buttons">
                 <button
