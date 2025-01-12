@@ -1,4 +1,6 @@
-.quizQuestion, .quizChoices, h2 {
+.quizQuestion,
+.quizChoices,
+h2 {
     margin-left: 1.2rem;
 }
 
@@ -22,12 +24,12 @@
 
 @media screen and (max-width: 480px) {
     .quizChoices {
-      display: flex;
-      flex-direction: column;
+        display: flex;
+        flex-direction: column;
     }
 
     .btn {
-       margin: auto 50%;
+        margin: auto 50%;
         width: 100px;
     }
-    }
+}

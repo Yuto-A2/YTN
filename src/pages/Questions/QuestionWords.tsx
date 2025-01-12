@@ -3,6 +3,7 @@ import "./question.css";
 import Header from "../../../components/Header/Header";
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
+import Result from "../../../components/Submitted/Submitted";
 
 interface Question {
     questionId: string;
@@ -31,6 +32,7 @@ export default function QuestionWords() {
                 const data = await response.json();
                 if (data?.quizes?.length > 0) {
                     setQuestions(data.quizes[0].questions);
+                    console.log("Questions fetched:", data.quizes[0].questions); 
                 } else {
                     setError("No questions available");
                 }
@@ -78,23 +80,23 @@ export default function QuestionWords() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+        
         let userScore = 0;
         questions.forEach((question) => {
             if (selectedAnswers[question.questionId] === question.answer) {
                 userScore++;
             }
         });
-    
+
         setScore(userScore);
         setIsSubmitted(true);
-    
+
         try {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
                 throw new Error("User not logged in");
             }
-    
+
             const response = await fetch('/api/user', {
                 method: 'POST',
                 headers: {
@@ -107,12 +109,11 @@ export default function QuestionWords() {
                     profilePicture: session.user.user_metadata?.profilePicture || "",
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error("Failed to update score");
             }
-    
-            console.log("Score updated successfully");
+
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error("Error updating score:", error.message);
@@ -121,7 +122,6 @@ export default function QuestionWords() {
             }
         }
     };
-    
 
     return (
         <>
@@ -136,18 +136,34 @@ export default function QuestionWords() {
                                     {question.questionId}. {question.question}
                                 </p>
                                 <div className="quizChoices">
-                                    {question.candidates.map((candidate, index) => (
-                                        <label key={index} className="quizChoice">
-                                            <input
-                                                type="radio"
-                                                name={`question_${question.questionId}`}
-                                                value={candidate}
-                                                checked={selectedAnswers[question.questionId] === candidate}
-                                                onChange={() => handleAnswerChange(question.questionId, candidate)}
-                                            />
-                                            {candidate}
-                                        </label>
-                                    ))}
+                                    {question.candidates.map((candidate, index) => {
+                                        const isCorrect = candidate === question.answer;
+                                        const isSelected = selectedAnswers[question.questionId] === candidate;
+                                        const isIncorrect = isSelected && !isCorrect;
+
+                                        let choiceClass = '';
+
+                                        if (isSubmitted) {
+                                            if (isCorrect) {
+                                                choiceClass = 'correct'; 
+                                            } else if (isIncorrect) {
+                                                choiceClass = 'incorrect'; 
+                                            }
+                                        }
+
+                                        return (
+                                            <label key={index} className={`quizChoice ${choiceClass}`}>
+                                                <input
+                                                    type="radio"
+                                                    name={`question_${question.questionId}`}
+                                                    value={candidate}
+                                                    checked={selectedAnswers[question.questionId] === candidate}
+                                                    onChange={() => handleAnswerChange(question.questionId, candidate)}
+                                                />
+                                                {candidate}
+                                            </label>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         ))}
@@ -160,9 +176,15 @@ export default function QuestionWords() {
             </div>
 
             {isSubmitted && (
-                <div className="result">
-                    <h3>Your Score: {score} / {questions.length}</h3>
-                </div>
+                <Result 
+                    score={score} 
+                    totalQuestions={questions.length} 
+                    onTryAgain={() => {
+                        setIsSubmitted(false);
+                        setScore(0);
+                        setSelectedAnswers({});
+                    }} 
+                />
             )}
         </>
     );
