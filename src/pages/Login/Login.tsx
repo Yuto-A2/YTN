@@ -8,10 +8,12 @@ import Footer from "../../../components/Footer/Footer"
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
     const router = useRouter();
 
     const doLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setErrMsg('');
         try {
             const { data, error } = await supabase.auth.signInWithPassword({ email, password });
             if (error) throw new Error(error.message);
@@ -19,6 +21,7 @@ export default function Register() {
             router.push('/MyPage/MyPage');
         } catch (err: unknown) {
             console.error(err);
+            setErrMsg('Incorrect username or password. Please try again.');
         }
     };
 
@@ -51,6 +54,9 @@ export default function Register() {
                     <div className="loginContainer">
                         <div className="loginForm">
                             <form className="login" method="post" onSubmit={doLogin}>
+                            {errMsg && (
+                                    <p className="errMsg">{errMsg}</p>
+                                )}
                                 <div className="formGroup">
                                     <label htmlFor="email">Email</label>
                                     <input

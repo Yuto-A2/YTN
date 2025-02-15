@@ -78,9 +78,17 @@
 
 .quizTitleContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 5%;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 480px) {
+    .quizTitleContainer {
+        flex-direction: column;
+    }
 }
 
 .title {
@@ -96,13 +104,14 @@
     align-items: center
 }
 
-.score {
+.score2 {
     display: flex;
     justify-content: flex-end;
-    padding: 0;
+    margin-top: -10px;
+    margin-right: 10px;
 }
 
-.score p {
+.score2 p {
     margin-top: 0;
 }
 

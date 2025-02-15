@@ -7,6 +7,7 @@ export const GET = async () => {
     try {
         await dbConnect();
         const quizes = await Quiz.find();
+        
         return NextResponse.json({ message: "Success", quizes }, { status: 200 });
     } catch (err) {
         console.error("Error fetching quizes:", err);

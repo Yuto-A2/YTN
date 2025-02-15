@@ -100,7 +100,7 @@
 .score {
     display: flex;
     justify-content: flex-end;
-    padding: 0;
+    padding: 10px;
 }
 
 .score p {

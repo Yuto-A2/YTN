@@ -6,6 +6,7 @@ export const GET = async (req: Request) => {
     try {
       const url = new URL(req.url);
       const supabaseId = url.searchParams.get("supabaseId");
+      const quizId = url.searchParams.get("quizId"); 
   
       if (!supabaseId) {
         return NextResponse.json({ message: "Supabase ID is required" }, { status: 400 });
@@ -17,6 +18,15 @@ export const GET = async (req: Request) => {
   
       if (!dbUser) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });
+      }
+
+      if (quizId) {
+        const score = dbUser.scores.find((s: { quizId: string }) => s.quizId === quizId);
+        if (score) {
+          return NextResponse.json({ message: "Score found", score }, { status: 200 });
+        } else {
+          return NextResponse.json({ message: "Score for the given quizId not found" }, { status: 404 });
+        }
       }
   
       const { scores, totalScore } = dbUser;

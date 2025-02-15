@@ -5,12 +5,19 @@ import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
 import Result from "../../../components/Submitted/Submitted";
 
+interface Category {
+    quizId: string;
+    name: string;
+    link: string;
+}
+
 interface Question {
     questionId: string;
     question: string;
     candidates: string[];
     answer: string;
     _id: string;
+    category: Category; 
 }
 
 export default function QuestionWords() {
@@ -21,6 +28,7 @@ export default function QuestionWords() {
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [score, setScore] = useState<number>(0);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [quizId, setQuizId] = useState<string | null>(null); 
 
     useEffect(() => {
         async function fetchQuestions() {
@@ -32,7 +40,8 @@ export default function QuestionWords() {
                 const data = await response.json();
                 if (data?.quizes?.length > 0) {
                     setQuestions(data.quizes[0].questions);
-                    console.log("Questions fetched:", data.quizes[0].questions); 
+                    setQuizId(data.quizes[0]._id); 
+                    console.log("Questions fetched:", data.quizes[0].questions);
                 } else {
                     setError("No questions available");
                 }
@@ -80,23 +89,27 @@ export default function QuestionWords() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+    
         let userScore = 0;
         questions.forEach((question) => {
             if (selectedAnswers[question.questionId] === question.answer) {
                 userScore++;
             }
         });
-
+    
         setScore(userScore);
         setIsSubmitted(true);
-
+    
         try {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
                 throw new Error("User not logged in");
             }
-
+    
+            if (!quizId) {
+                throw new Error("Quiz ID not found");
+            }
+    
             const response = await fetch('/api/user', {
                 method: 'POST',
                 headers: {
@@ -104,16 +117,16 @@ export default function QuestionWords() {
                 },
                 body: JSON.stringify({
                     supabaseId: session.user.id,
-                    quizId: questions[0]._id, 
+                    quizId: quizId,  
                     score: userScore,
                     profilePicture: session.user.user_metadata?.profilePicture || "",
                 }),
             });
-
+    
             if (!response.ok) {
                 throw new Error("Failed to update score");
             }
-
+    
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error("Error updating score:", error.message);

@@ -10,6 +10,7 @@ const QuizSchema = new mongoose.Schema(
         category: {  
             name: { type: String, default: "" },
             link: { type: String, default: "" },
+            quizId: {type: String, required: true,},
         },
         questions: {
             type: [

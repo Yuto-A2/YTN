@@ -16,6 +16,7 @@
     }
 
     section {
+        max-width: 500px;
         width: 100%;
     }
 
@@ -81,6 +82,11 @@
     margin-right: 20%;
 }
 
+.errMsg {
+    text-align: center;
+    color: red;
+}
+
 @media screen and (max-width: 480px) {
     .loginForm {
         display: flex;
@@ -121,8 +127,14 @@ input {
         width: 300px;
         left: 20px;
         top: 100%;
+        
     }
-}
+
+    .btn {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    }
 
 .btn {
     width: 114px;

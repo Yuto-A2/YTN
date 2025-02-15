@@ -82,6 +82,7 @@ input {
     background-color: #528CF8;
     border-radius: 1.2rem;
     transition: all 0.8s;
+    margin-top: 16px;
 }
 
 .btn:hover {
