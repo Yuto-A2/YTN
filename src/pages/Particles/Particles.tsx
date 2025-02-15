@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import "./Particles.css";
+import "./particles.css";
 import Header from "../../../components/Header/Header";
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
