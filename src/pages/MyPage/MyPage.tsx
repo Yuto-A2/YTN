@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 interface Quiz {
     quizId: string;
     score: number;
+    category: Category; 
 }
 
 interface Category {
@@ -54,7 +55,7 @@ export default function Register() {
                 const data = await response.json();
                 console.log("API response:", data);
 
-                const allCategories = data.quizes.map((quiz: any) => quiz.category);
+                const allCategories = data.quizes.map((quiz: Quiz) => quiz.category);
                 setCategories(allCategories);
 
             } catch (error) {
@@ -86,7 +87,7 @@ export default function Register() {
                     </>
                 ) : (
                     <>
-                        <p className="txt">You haven't completed any tasks yet.</p>
+                        <p className="txt">You haven&apos;t completed any tasks yet.</p>
                         <p className="txt">Start working on quizzes to track your progress!</p>
                     </>
                 )}
