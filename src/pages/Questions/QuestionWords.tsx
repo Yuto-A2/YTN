@@ -4,6 +4,7 @@ import Header from "../../../components/Header/Header";
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
 import Result from "../../../components/Submitted/Submitted";
+import OpenAi from "../../../components/OpenAi/OpenAi";
 
 interface Category {
     quizId: string;
@@ -199,6 +200,8 @@ export default function QuestionWords() {
                     }} 
                 />
             )}
+            <p>Ask AI.</p>
+            <OpenAi />
         </>
     );
 }

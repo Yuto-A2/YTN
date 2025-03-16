@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import "./particles.css";
 import Header from "../../../components/Header/Header";
+import OpenAi from "../../../components/OpenAi/OpenAi";
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
 import Result from "../../../components/Submitted/Submitted";
@@ -199,6 +200,9 @@ export default function QuestionWords() {
                     }} 
                 />
             )}
+
+            <p>Ask AI.</p>
+            <OpenAi />
         </>
     );
 }
