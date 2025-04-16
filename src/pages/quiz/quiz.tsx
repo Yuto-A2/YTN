@@ -46,12 +46,12 @@ export default function QuestionWords() {
                 }
 
                 const data = await response.json();
-                console.log("data.quiz:", data.quiz); // デバッグ用ログ
+                // console.log("data.quiz:", data.quiz); 
 
                 if (data?.quiz?.questions?.length > 0) {
                     setQuestions(data.quiz.questions);
                     setQuizId(data.quiz._id);
-                    setCategory(data.quiz.category); // ← ここを修正！
+                    setCategory(data.quiz.category); 
                   } else {
                     setError("No questions available");
                   } 
@@ -69,12 +69,11 @@ export default function QuestionWords() {
         }
 
         fetchQuestions();
-    }, [router.isReady, router.query.id]); // ← 修正ポイント
+    }, [router.isReady, router.query.id]); 
 
-    // カテゴリが更新されたらログを表示
     useEffect(() => {
         if (category) {
-            console.log("カテゴリが更新されました:", category);
+            console.log("Updated Category:", category);
         }
     }, [category]);
 
