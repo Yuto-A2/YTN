@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import "./question.css";
+import "./particles.css";
 import Header from "../../../components/Header/Header";
+import OpenAi from "../../../components/OpenAi/OpenAi";
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/router';
 import Result from "../../../components/Submitted/Submitted";
-import OpenAi from "../../../components/OpenAi/OpenAi";
 
 interface Category {
     quizId: string;
@@ -18,7 +18,7 @@ interface Question {
     candidates: string[];
     answer: string;
     _id: string;
-    category: Category; 
+    category: Category;
 }
 
 export default function QuestionWords() {
@@ -29,23 +29,32 @@ export default function QuestionWords() {
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [score, setScore] = useState<number>(0);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-    const [quizId, setQuizId] = useState<string | null>(null); 
+    const [quizId, setQuizId] = useState<string | null>(null);
+    const [category, setCategory] = useState<Category | null>(null);
 
     useEffect(() => {
         async function fetchQuestions() {
+            if (!router.isReady) return;
+
+            const { id } = router.query;
+            if (!id) return;
+
             try {
-                const response = await fetch('/api/quiz');
+                const response = await fetch(`/api/quiz/id?id=${id}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch questions");
                 }
+
                 const data = await response.json();
-                if (data?.quizes?.length > 0) {
-                    setQuestions(data.quizes[0].questions);
-                    setQuizId(data.quizes[0]._id); 
-                    console.log("Questions fetched:", data.quizes[0].questions);
-                } else {
+                console.log("data.quiz:", data.quiz); // デバッグ用ログ
+
+                if (data?.quiz?.questions?.length > 0) {
+                    setQuestions(data.quiz.questions);
+                    setQuizId(data.quiz._id);
+                    setCategory(data.quiz.category); // ← ここを修正！
+                  } else {
                     setError("No questions available");
-                }
+                  } 
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     setError(error.message);
@@ -60,7 +69,14 @@ export default function QuestionWords() {
         }
 
         fetchQuestions();
-    }, []);
+    }, [router.isReady, router.query.id]); // ← 修正ポイント
+
+    // カテゴリが更新されたらログを表示
+    useEffect(() => {
+        if (category) {
+            console.log("カテゴリが更新されました:", category);
+        }
+    }, [category]);
 
     useEffect(() => {
         async function checkLoginStatus() {
@@ -90,27 +106,27 @@ export default function QuestionWords() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         let userScore = 0;
         questions.forEach((question) => {
             if (selectedAnswers[question.questionId] === question.answer) {
                 userScore++;
             }
         });
-    
+
         setScore(userScore);
         setIsSubmitted(true);
-    
+
         try {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
                 throw new Error("User not logged in");
             }
-    
+
             if (!quizId) {
                 throw new Error("Quiz ID not found");
             }
-    
+
             const response = await fetch('/api/user', {
                 method: 'POST',
                 headers: {
@@ -118,16 +134,16 @@ export default function QuestionWords() {
                 },
                 body: JSON.stringify({
                     supabaseId: session.user.id,
-                    quizId: quizId,  
+                    quizId: quizId,
                     score: userScore,
                     profilePicture: session.user.user_metadata?.profilePicture || "",
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error("Failed to update score");
             }
-    
+
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error("Error updating score:", error.message);
@@ -140,7 +156,7 @@ export default function QuestionWords() {
     return (
         <>
             <Header />
-            <h2>ぎもんし</h2>
+            <h2>{category?.name || 'Loading category...'}</h2>
             <div className="quizTitleContainer">
                 {questions.length > 0 ? (
                     <form onSubmit={handleSubmit}>
@@ -159,9 +175,9 @@ export default function QuestionWords() {
 
                                         if (isSubmitted) {
                                             if (isCorrect) {
-                                                choiceClass = 'correct'; 
+                                                choiceClass = 'correct';
                                             } else if (isIncorrect) {
-                                                choiceClass = 'incorrect'; 
+                                                choiceClass = 'incorrect';
                                             }
                                         }
 
@@ -190,16 +206,17 @@ export default function QuestionWords() {
             </div>
 
             {isSubmitted && (
-                <Result 
-                    score={score} 
-                    totalQuestions={questions.length} 
+                <Result
+                    score={score}
+                    totalQuestions={questions.length}
                     onTryAgain={() => {
                         setIsSubmitted(false);
                         setScore(0);
                         setSelectedAnswers({});
-                    }} 
+                    }}
                 />
             )}
+
             <p>Ask AI.</p>
             <OpenAi />
         </>
