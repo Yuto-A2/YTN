@@ -34,7 +34,7 @@ export default function Register() {
             try {
                 const response = await fetch('/api/N5');
                 const data = await response.json();
-                console.log("API response:", data); 
+                // console.log("API response:", data); 
                 setCategories(data.categories);
                 setUserScores(data.userScores || []); 
             } catch (error) {
@@ -51,7 +51,7 @@ export default function Register() {
             if (!session) {
                 router.push('/Login/Login');
             } else {
-                console.log("Logged in supabaseId:", session.user.id);
+                // console.log("Logged in supabaseId:", session.user.id);
                 setSupabaseId(session.user.id);
             }
         }
@@ -66,33 +66,33 @@ export default function Register() {
         };
     
         const quizId = categoryToQuizIdMap[categoryName];
-        console.log(`quizId for ${categoryName}: ${quizId}`);  
+        // console.log(`quizId for ${categoryName}: ${quizId}`);  
     
         if (!quizId) {
-            console.log(`No quizId found for category: ${categoryName}`);
+            // console.log(`No quizId found for category: ${categoryName}`);
             return 0;
         }
     
         if (!Array.isArray(userScores)) {
-            console.log("userScores is not an array:", userScores);
+            // console.log("userScores is not an array:", userScores);
             return 0;
         }
     
         const userScore = userScores.find(user => user.supabaseId === currentSupabaseId);
         if (!userScore) {
-            console.log(`No user found with supabaseId: ${currentSupabaseId}`);
+            // console.log(`No user found with supabaseId: ${currentSupabaseId}`);
             return 0;
         }
     
-        console.log(`User scores for ${currentSupabaseId}:`, userScore.scores);  
+        // console.log(`User scores for ${currentSupabaseId}:`, userScore.scores);  
     
         const scoreObj = userScore.scores.find(score => score.quizId === quizId);
         if (!scoreObj) {
-            console.log(`No score found for quizId: ${quizId}`);
+            // console.log(`No score found for quizId: ${quizId}`);
             return 0;
         }
     
-        console.log(`Score for quizId ${quizId}: ${scoreObj.score}`);  
+        // console.log(`Score for quizId ${quizId}: ${scoreObj.score}`);  
         return scoreObj.score;
     };
     
