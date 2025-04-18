@@ -61,8 +61,8 @@ export default function Register() {
 
     const getScoreForCategory = (categoryName: string, currentSupabaseId: string): number => {
         const categoryToQuizIdMap: { [key: string]: string } = {
-            "ぎもんし": "67771274ed0249d0b394ef62",
-            "じょどうし": "677723dfed0249d0b394ef7b",
+            "Question Words": "67771274ed0249d0b394ef62",
+            "Particles": "677723dfed0249d0b394ef7b",
         };
     
         const quizId = categoryToQuizIdMap[categoryName];
