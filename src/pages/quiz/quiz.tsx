@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import "./particles.css";
+import "./quiz.css";
 import Header from "../../../components/Header/Header";
 import OpenAi from "../../../components/OpenAi/OpenAi";
 import { supabase } from '../../../utils/supabase';
@@ -216,7 +216,7 @@ export default function QuestionWords() {
                 />
             )}
 
-            <p>Ask AI.</p>
+            <p className='askAI'>Ask AI.</p>
             <OpenAi />
         </>
     );

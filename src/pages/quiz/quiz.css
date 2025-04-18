@@ -27,7 +27,19 @@
     }
 
     .btn {
-       margin: auto 50%;
+       margin: 16px auto;
         width: 100px;
+    }
+
+    form {
+        font-size: 1.6rem;
+    }
+
+    input {
+        margin-bottom: 24px;
+    }
+
+    .askAI{
+        text-align: center;
     }
     }

@@ -36,12 +36,25 @@ form {
     padding: 8px;
 }
 
+.ai {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 480px) {
     .response {
         width: 300px;
     }
-}
 
-.ai {
-    font-weight: bold;
+    .btnAi {
+        margin: 8px auto;
+    }
+
+    textarea {
+        height: 160px;
+        margin: 16px auto;
+    }
+
+    .response {
+        margin: 8px auto;
+    }
 }
