@@ -63,6 +63,7 @@ export default function Register() {
         const categoryToQuizIdMap: { [key: string]: string } = {
             "Question Words": "67771274ed0249d0b394ef62",
             "Particles": "677723dfed0249d0b394ef7b",
+            "Adjectives": "6802d0288b33fd8ab18bab8f",
         };
     
         const quizId = categoryToQuizIdMap[categoryName];
