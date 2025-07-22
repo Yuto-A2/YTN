@@ -1,21 +1,55 @@
-# Japanese-learning-app
+# Japanese-learning-app (YTN)
 
 ## Summary
 
-This is a Japanese learning app. 
+This is a Japanese learning application designed for learners of the language. I created it because I felt that there isn’t much information available online for the Japanese Language Proficiency Test (JLPT), and there are far fewer free learning resources compared to English. I wanted to build a website where Japanese learners could better challenge themselves and track their progress.
 
-Users can login and save their scores.
+Users can log in and solve questions. Their scores are recorded, allowing them to identify which areas they struggle with. The questions are categorized by level, so users can practice according to their own proficiency.
 
-I use ChatGPT API and users can ask questions to AI.
+If they don’t understand an answer or why it is correct, they can ask ChatGPT AI directly on the site for an explanation.
 
-## The reason why I made this app
+URL: (https://ytn-lemon.vercel.app/Login/Login)
 
-I am teaching Japanese and I wanted to build something my students practice what they have learned.
+## Production period
 
-Since they can store their scores, they can keep their progresses.
+About one month.
 
-They can also ask ChatGPT if they have questions.
+## Main Feature
+
+* Logged-in users can solve questions and save their scores.
+* If they encounter a question they don't understand, they can ask ChatGPT AI directly on the site for help.
 
 ## Tools
 
-Next.js, Typescript, Supabase, MongoDB, ChatGPT API
+* Frontend
+  * CSS, Next.js, TypeScript
+    
+* Backend/DB
+  * Supabase, MongDB
+ 
+* CI/CD
+  * Vercel
+ 
+* Source Code Management
+  * Git/GitHub
+ 
+* Others
+  * ChatGPT API
+ 
+## User's Information
+
+* New user registration.
+* Login with email and password.
+* Retrieve user profile. (My Page)
+* Retrieve, save, and update user scores.
+
+## Quiz's Information
+
+* Fetch list of quizzes.
+* View quiz details.
+* Display completed quizzes.
+
+
+
+
+
